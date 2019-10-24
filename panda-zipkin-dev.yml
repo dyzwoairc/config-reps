@@ -3,8 +3,8 @@ zipkin:
     rabbitmq:
       addresses: 127.0.0.1
       port: 9093
-      username: 
-      password: 
+      username: guest
+      password: guest
       virtual-host: /
       queue: zipkin
   storage:
