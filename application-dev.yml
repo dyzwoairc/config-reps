@@ -3,15 +3,17 @@ server:
 spring:
   cloud:
     nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
       config:
         server-addr: 127.0.0.1:8848
         file-extension: yml
         shared-dataids: mysql.yml
         refreshable-dataids: mysql.yml
+  application:
+    name: panda-user-service
   profiles:
     active: dev
-  application:
-      name: panda-user-service
 -- bootstrap.yml
 
 -- bootstrap-dev.yml
@@ -26,17 +28,12 @@ spring:
  <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-                <version>0.2.1.RELEASE</version>
+                <version>0.2.2.RELEASE</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-                <version>0.2.1.RELEASE</version>
-            </dependency>
-            <dependency>
-                <groupId>com.alibaba.nacos</groupId>
-                <artifactId>nacos-client</artifactId>
-                <version>0.8.0</version>
+                <version>0.2.2.RELEASE</version>
             </dependency>
              <dependency>
             <groupId>org.apache.commons</groupId>
