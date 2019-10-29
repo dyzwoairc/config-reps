@@ -1,15 +1,104 @@
-eureka:
-  client:
-    service-url:
-      defaultZone: http://127.0.0.1:8761/eureka/
-
 server:
-  tomcat:
-    max-threads: 500 # Maximum amount of worker threads.
-    min-spare-threads: 50 # Minimum amount of worker threads
+  port: 9001
 spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: 127.0.0.1:8848
+        file-extension: yml
+        shared-dataids: mysql.yml
+        refreshable-dataids: mysql.yml
+  profiles:
+    active: dev
+  application:
+      name: panda-user-service
+-- bootstrap.yml
+
+-- bootstrap-dev.yml
+spring:
+  cloud:
+    nacos:
+      config:
+        namespace: 5f6ec9ff-5dfb-47a5-95fe-91fc00f7d732
+      discovery:
+        namespace: 5f6ec9ff-5dfb-47a5-95fe-91fc00f7d732
+        
+ <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>0.2.1.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+                <version>0.2.1.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.nacos</groupId>
+                <artifactId>nacos-client</artifactId>
+                <version>0.8.0</version>
+            </dependency>
+             <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.9</version>
+        </dependency>
+
+
+
+111111111111111111111
+             <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.nacos</groupId>
+            <artifactId>nacos-client</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        
+        
+        
+mysql
+-----
+spring:
+  quartz:
+    job-store-type: jdbc
+      #相关属性配置
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: clusteredScheduler
+            instanceId: AUTO
+          jobStore:
+            class: org.quartz.impl.jdbcjobstore.JobStoreTX
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+            tablePrefix: QRTZ_
+            isClustered: true
+            clusterCheckinInterval: 10000
+            useProperties: false
+          threadPool:
+            class: org.quartz.simpl.SimpleThreadPool
+            threadCount: 10
+            threadPriority: 5
+            threadsInheritContextClassLoaderOfInitializingThread: true
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/futrue_tech?useUnicode=true&characterEncoding=UTF8&useSSL=false&autoReconnect=true
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=UTF8&useSSL=false&autoReconnect=true
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: 123456789
@@ -21,22 +110,22 @@ spring:
     validation-query: SELECT 1
     hikari:
       minimum-idle: 0
-  redis:
-    host: 127.0.0.1
-    port: 6379
-    password:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+      password:
 
-  rabbitmq:
-    host: 127.0.0.1
-    port: 5672
-    username: guest
-    password: guest
-  http:
-    multipart:
-      max-file-size: 1000MB
-      max-request-size: 1000MB
-  zipkin: 
-    base-url: http://localhost:5001
+    rabbitmq:
+      host: 127.0.0.1
+      port: 5672
+      username: guest
+      password: guest
+    http:
+      multipart:
+        max-file-size: 1000MB
+        max-request-size: 1000MB
+    zipkin:
+      base-url: http://localhost:5001
 redis:
   cache:
     expiration: 3601
@@ -87,6 +176,3 @@ management:
     web:
       server:
         auto-time-requests: false
-
-
- 
